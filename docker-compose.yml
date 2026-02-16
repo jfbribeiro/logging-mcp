@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: audit-db
+    environment:
+      POSTGRES_DB: audit_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - audit_pg_data:/var/lib/postgresql/data
+      - ./src/main/resources/db/migration/V1__create_audit_log_table.sql:/docker-entrypoint-initdb.d/V1__create_audit_log_table.sql:ro
+
+volumes:
+  audit_pg_data:
