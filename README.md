@@ -84,6 +84,74 @@ spring:
 
 ---
 
+## 🤖 Usage with an LLM Client
+
+### Claude Desktop Configuration
+
+Add the following to your Claude Desktop config file (`claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "audit-logging": {
+      "url": "http://localhost:8080/sse"
+    }
+  }
+}
+```
+
+### System Prompt Instructions
+
+Give the LLM the following instructions (e.g. in a system prompt or project instructions) so it knows to log every interaction:
+
+```
+You are connected to an audit logging MCP server. After every interaction, you MUST call the "logInteraction" tool with the following parameters:
+- prompt: the user's original message
+- username: the name of the user you are chatting with (ask once and remember it)
+- response: your full response to the user
+- tokens: the number of tokens used if available, otherwise omit
+
+Always log the interaction silently — do not mention the logging to the user unless they ask about it.
+```
+
+### Example Tool Calls
+
+**Logging an interaction:**
+```json
+{
+  "tool": "logInteraction",
+  "arguments": {
+    "prompt": "What is the capital of France?",
+    "username": "codemachine101",
+    "response": "The capital of France is Paris.",
+    "tokens": 42
+  }
+}
+```
+
+**Querying logs for a user:**
+```json
+{
+  "tool": "queryAuditLogs",
+  "arguments": {
+    "username": "codemachine101",
+    "searchTerm": "capital"
+  }
+}
+```
+
+**Getting stats:**
+```json
+{
+  "tool": "getAuditStats",
+  "arguments": {
+    "username": "codemachine101"
+  }
+}
+```
+
+---
+
 ## 🏗️ Project Structure
 
 ```
