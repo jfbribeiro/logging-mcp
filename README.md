@@ -94,7 +94,7 @@ Add the following to your Claude Desktop config file (`claude_desktop_config.jso
 {
   "mcpServers": {
     "audit-logging": {
-      "url": "http://localhost:8080/sse"
+      "url": "http://localhost:8080/logging-mcp/sse"
     }
   }
 }

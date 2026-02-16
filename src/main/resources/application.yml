@@ -15,7 +15,8 @@ spring:
         name: audit-logging-mcp
         version: 0.0.1
         type: SYNC
-        sse-message-endpoint: /mcp/messages
+        sse-endpoint: /logging-mcp/sse
+        sse-message-endpoint: /logging-mcp/messages
 
 server:
   port: 8080
