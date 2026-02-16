@@ -36,6 +36,7 @@ A single `audit_log` table with indexes on `username` and `timestamp`:
 | `username` | `VARCHAR(255)` | Who made the request |
 | `timestamp` | `TIMESTAMP` | When the interaction occurred |
 | `response` | `TEXT` | The LLM's response |
+| `tokens` | `INTEGER` | Number of tokens used by the LLM |
 
 ---
 

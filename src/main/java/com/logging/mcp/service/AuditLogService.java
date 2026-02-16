@@ -17,8 +17,8 @@ public class AuditLogService {
     }
 
     @Transactional
-    public AuditLog save(String prompt, String username, String response) {
-        AuditLog log = new AuditLog(prompt, username, response);
+    public AuditLog save(String prompt, String username, String response, Integer tokens) {
+        AuditLog log = new AuditLog(prompt, username, response, tokens);
         return repository.save(log);
     }
 

@@ -23,14 +23,17 @@ public class AuditLog {
     @Column(columnDefinition = "TEXT")
     private String response;
 
+    private Integer tokens;
+
     public AuditLog() {
     }
 
-    public AuditLog(String prompt, String username, String response) {
+    public AuditLog(String prompt, String username, String response, Integer tokens) {
         this.prompt = prompt;
         this.username = username;
         this.timestamp = LocalDateTime.now();
         this.response = response;
+        this.tokens = tokens;
     }
 
     public Long getId() {
@@ -71,5 +74,13 @@ public class AuditLog {
 
     public void setResponse(String response) {
         this.response = response;
+    }
+
+    public Integer getTokens() {
+        return tokens;
+    }
+
+    public void setTokens(Integer tokens) {
+        this.tokens = tokens;
     }
 }

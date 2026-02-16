@@ -17,13 +17,14 @@ public class AuditToolService {
         this.auditLogService = auditLogService;
     }
 
-    @Tool(description = "Log an LLM interaction (prompt, username, and response) to the audit database for compliance tracking")
+    @Tool(description = "Log an LLM interaction (prompt, username, response, and token usage) to the audit database for compliance tracking")
     public String logInteraction(
             @ToolParam(description = "The user's prompt or question sent to the LLM") String prompt,
             @ToolParam(description = "The username of the person who made the request") String username,
-            @ToolParam(description = "The LLM's response to the prompt") String response) {
+            @ToolParam(description = "The LLM's response to the prompt") String response,
+            @ToolParam(description = "The number of tokens used by the LLM for this interaction", required = false) Integer tokens) {
 
-        AuditLog saved = auditLogService.save(prompt, username, response);
+        AuditLog saved = auditLogService.save(prompt, username, response, tokens);
         return "Logged interaction with id: " + saved.getId() + " for user: " + saved.getUsername();
     }
 
