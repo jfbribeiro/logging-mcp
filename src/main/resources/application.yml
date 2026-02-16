@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/audit_db
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  ai:
+    mcp:
+      server:
+        name: audit-logging-mcp
+        version: 0.0.1
+        type: SYNC
+        sse-message-endpoint: /mcp/messages
+
+server:
+  port: 8080
